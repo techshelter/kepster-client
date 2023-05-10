@@ -1,0 +1,167 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:4000/api/email/register?register_params%5Bcore_group_id%5D=97dc99ac-9b7b-4b9c-b0be-b44c17bf92be&register_params%5Bemail%5D=yuk.kuhn@lang.test&register_params%5Bfirst_name%5D=Sid&register_params%5Blast_name%5D=Buckridge&register_params%5Bredirect_url%5D=http://schimmel-schmitt.test/beryl
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      X-Kepster-Token:
+      - 1683288138:6DE10D990EC66757D5D75586208E46FC424EB77041326C1618C5B7806AD5D034
+      X-Kepster-Key:
+      - ZnhrMEZVKzY1blB
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Length:
+      - '114'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 05 May 2023 12:02:18 GMT
+      Server:
+      - Cowboy
+      X-Request-Id:
+      - F1w9pLutohuipDcAAAGk
+    body:
+      encoding: UTF-8
+      string: '{"core_user_id":"7323a144-2f85-4622-b641-22d505a13eed","message":"link
+        succesfully sent by e-mail","success":true}'
+  recorded_at: Fri, 05 May 2023 12:02:18 GMT
+- request:
+    method: post
+    uri: http://localhost:4000/api/email/register?register_params%5Bcore_group_id%5D=97dc99ac-9b7b-4b9c-b0be-b44c17bf92be&register_params%5Bemail%5D=jed_vonrueden@sawayn-haag.example&register_params%5Bfirst_name%5D=Jayna&register_params%5Blast_name%5D=Morissette&register_params%5Bredirect_url%5D=http://bailey.test/celine
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      X-Kepster-Token:
+      - 1683288138:097F5E9AB7C52028C913504720BCE1695BA67129CCD357081F817F7AA168B78E
+      X-Kepster-Key:
+      - ZnhrMEZVKzY1blB
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Length:
+      - '114'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 05 May 2023 12:02:18 GMT
+      Server:
+      - Cowboy
+      X-Request-Id:
+      - F1w9pMh_B9rvd3AAAAIE
+    body:
+      encoding: UTF-8
+      string: '{"core_user_id":"dafaf918-c96b-413f-9306-997004cfc6eb","message":"link
+        succesfully sent by e-mail","success":true}'
+  recorded_at: Fri, 05 May 2023 12:02:18 GMT
+- request:
+    method: post
+    uri: http://localhost:4000/api/email/register?register_params%5Bcore_group_id%5D=97dc99ac-9b7b-4b9c-b0be-b44c17bf92be&register_params%5Bemail%5D=catherina.prohaska@sporer.example&register_params%5Bfirst_name%5D=Oneida&register_params%5Blast_name%5D=Gottlieb&register_params%5Bredirect_url%5D=http://rodriguez-johnson.test/dewitt.pollich
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      X-Kepster-Token:
+      - 1683289099:02060189190B05F7AD51DDD01655C561D567EBF60F0502C1E7A1F76392F61FEE
+      X-Kepster-Key:
+      - ZnhrMEZVKzY1blB
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Length:
+      - '114'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 05 May 2023 12:18:19 GMT
+      Server:
+      - Cowboy
+      X-Request-Id:
+      - F1w-hH950dm4mrwAAAWh
+    body:
+      encoding: UTF-8
+      string: '{"core_user_id":"ff500628-accf-4c9b-8921-f31126405060","message":"link
+        succesfully sent by e-mail","success":true}'
+  recorded_at: Fri, 05 May 2023 12:18:19 GMT
+- request:
+    method: post
+    uri: http://localhost:4000/api/email/register?register_params%5Bcore_group_id%5D=97dc99ac-9b7b-4b9c-b0be-b44c17bf92be&register_params%5Bemail%5D=elton@gerhold-kilback.example&register_params%5Bfirst_name%5D=Anderson&register_params%5Blast_name%5D=Bailey&register_params%5Bredirect_url%5D=http://ebert.example/iliana.jakubowski
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      X-Kepster-Token:
+      - 1683289106:A43A6CBB6FEB69358B013AF80826F1374B321FF0B3F0B210DA9BF5A9DEF579EE
+      X-Kepster-Key:
+      - ZnhrMEZVKzY1blB
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Length:
+      - '114'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 05 May 2023 12:18:26 GMT
+      Server:
+      - Cowboy
+      X-Request-Id:
+      - F1w-hjD2nLIpkkgAAAIk
+    body:
+      encoding: UTF-8
+      string: '{"core_user_id":"bc6f9f3c-2558-4371-be15-d3dce3ff0a40","message":"link
+        succesfully sent by e-mail","success":true}'
+  recorded_at: Fri, 05 May 2023 12:18:26 GMT
+recorded_with: VCR 6.1.0
