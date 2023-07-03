@@ -2,17 +2,7 @@
 # create a module email for kepster client with httparty
 module Kepster
   module Client
-    class Email
-      include HTTParty
-      base_uri ENV['KEPSTER_ENDPOINT']
-      format :json
-
-      
-      def initialize
-        @kepster_api_key = ENV['KEPSTER_API_KEY']
-        @kepster_shared_secret = ENV['KEPSTER_SHARED_SECRET']
-        @kepster_signing_key = ENV['KEPSTER_SIGNING_KEY']
-      end
+    class Email < Base
 
       def register(first_name:, last_name:, email:, core_group_id:, redirect_url:)
         path = '/api/email/register'
@@ -40,6 +30,20 @@ module Kepster
         token = x_kepster_token(payload, path)
         self.class.delete(path, headers: headers(token), query: payload)
       end
+
+      def validate_token(token, user_id)
+        path = "/api/email/token"
+        payload = {code: token, auth_user_id: user_id}
+        token = x_kepster_token(payload, path)
+        self.class.get(path, headers: headers(token), query: payload)
+      end
+
+      # def refresh_token(refresh_token)
+      #   path = "/api/email/token"
+      #   payload = {refresh_token:}
+      #   token = x_kepster_token(payload, path)
+      #   self.class.get(path, headers: headers(token), query: payload)
+      # end
 
       private
 
