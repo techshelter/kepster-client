@@ -32,6 +32,14 @@ module Kepster
         response.parsed_response
       end
 
+      def validate_auth_otp(phone_number:, otp_sended:, group_id:)
+        path = '/api/sms/auth/token'
+        payload = { phone_number:, otp_sended:, group_id: }
+        token = x_kepster_token(payload, path)
+        response = self.class.get(path, headers: headers(token), query: payload)
+        response.parsed_response
+      end
+
     end
   end
 end
