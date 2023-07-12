@@ -40,6 +40,22 @@ module Kepster
         response.parsed_response
       end
 
+      def logout(refresh_token)
+        path ='/api/sms/logout'
+        payload = { refresh_token:}
+        token = x_kepster_token(payload, path)
+        response = self.class.delete(path, headers: headers(token), query: payload)
+        response.parsed_response
+      end
+
+      def resend_otp(phone_number:, group_id:)
+        path = '/api/sms/resend-otp'
+        payload = { phone_number:, group_id: }
+        token = x_kepster_token(payload, path)
+        response = self.class.post(path, headers: headers(token), query: payload)
+        response.parsed_response
+      end
+
     end
   end
 end

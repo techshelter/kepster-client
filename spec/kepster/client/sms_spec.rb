@@ -281,4 +281,109 @@ RSpec.describe Kepster::Client::SMS do
     end
 
   end
+
+  describe "#resend_otp" do
+    let(:subject) { described_class.new.resend_otp(**payload) }
+    let(:payload) do 
+      { 
+        phone_number:,
+        group_id:
+      }
+    end
+    
+    context "when registration exists" do
+      let(:phone_number) { Faker::PhoneNumber.cell_phone_in_e164 }
+      let(:group_id) { ENV['KEPSTER_SMS_NO_REGISTER_GROUP_ID'] }
+      it "fails" do
+        VCR.use_cassette('sms/resend_otp/invalid_phone_number') do
+          response = subject
+          expect(response["message"]["message"]).to eq("Code not send")
+          expect(response["message"]["reason"]).to eq("Registration not found")
+        end
+      end
+    end
+
+    context "when registration does not exist" do
+      let(:phone_number) { Faker::PhoneNumber.cell_phone_in_e164 }
+      let(:group_id) { ENV['KEPSTER_SMS_REGISTER_GROUP_ID'] }
+
+      before do
+        payload = {
+          first_name: Faker::Name.first_name,
+          last_name: Faker::Name.last_name,
+          phone_number:,
+          core_group_id: group_id
+        }
+        @register = described_class.new.register(**payload)
+      end
+
+      it "succeeds" do
+        VCR.use_cassette('sms/resend_otp/valid_phone_number') do
+          response = subject
+          expect(response["message"]["message"]).to eq("code de verification envoyé")
+        end
+      end
+    end
+  end
+  
+
+  describe 'logout' do
+    let(:subject) { described_class.new.logout(**payload) }
+    let(:payload) do 
+      {
+        refresh_token:
+      }
+    end
+
+    context "when refresh_token is not valid" do
+      let(:refresh_token) { 
+        Faker::Internet.unique.password(min_length: 20, max_length: 40)
+      }
+
+      it 'failure with message' do
+        VCR.use_cassette('sms/logout/invalid_refresh_token') do
+          response = subject
+          raise response.inspect
+        end
+      end
+    end
+
+    context 'when refresh_token is valid' do
+      let(:phone_number) { Faker::PhoneNumber.cell_phone_in_e164 }
+      let(:group_id) { ENV['KEPSTER_SMS_REGISTER_GROUP_ID'] }
+      let(:otp_sended) { @register["message"]["code"]["code"] }
+      let(:refresh_token) { @refresh_token }
+      let(:payloads) do
+        {
+          phone_number:phone_number,
+          group_id:group_id,
+          otp_sended:otp_sended
+        }
+    end
+
+      before do
+        payload = {
+          first_name: Faker::Name.first_name,
+          last_name: Faker::Name.last_name,
+          phone_number:,
+          core_group_id: group_id
+        }
+        @register = described_class.new.register(**payload)
+        
+      end
+
+      it 'return token' do
+        VCR.use_cassette('sms/verification/valid_otp') do
+          sleep 15
+          @registration = described_class.new.validate_registration_otp(**payloads)
+          @refresh_token = @registration["message"]["tokens"]["refresh_token"]
+          response = subject
+          raise response.inspect
+          # expect(response["message"]["tokens"]).to have_key("access_token")
+          # expect(response["message"]["tokens"]).to have_key("refresh_token")
+        end
+      end
+
+    end
+  end
 end
