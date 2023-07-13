@@ -343,7 +343,7 @@ RSpec.describe Kepster::Client::SMS do
       it 'failure with message' do
         VCR.use_cassette('sms/logout/invalid_refresh_token') do
           response = subject
-          raise response.inspect
+          expect(response["message"]).to eq("Logout fail")
         end
       end
     end
@@ -353,13 +353,14 @@ RSpec.describe Kepster::Client::SMS do
       let(:group_id) { ENV['KEPSTER_SMS_REGISTER_GROUP_ID'] }
       let(:otp_sended) { @register["message"]["code"]["code"] }
       let(:refresh_token) { @refresh_token }
+      
       let(:payloads) do
         {
           phone_number:phone_number,
           group_id:group_id,
           otp_sended:otp_sended
         }
-    end
+      end
 
       before do
         payload = {
@@ -374,13 +375,11 @@ RSpec.describe Kepster::Client::SMS do
 
       it 'return token' do
         VCR.use_cassette('sms/verification/valid_otp') do
-          sleep 15
+          sleep 17
           @registration = described_class.new.validate_registration_otp(**payloads)
           @refresh_token = @registration["message"]["tokens"]["refresh_token"]
           response = subject
-          raise response.inspect
-          # expect(response["message"]["tokens"]).to have_key("access_token")
-          # expect(response["message"]["tokens"]).to have_key("refresh_token")
+          expect(response["message"]).to eq("Logout success")
         end
       end
 

@@ -43,8 +43,8 @@ module Kepster
       def logout(refresh_token)
         path ='/api/sms/logout'
         payload = { refresh_token:}
-        token = x_kepster_token(payload, path)
-        response = self.class.delete(path, headers: headers(token), query: payload)
+        token = x_kepster_token(refresh_token, path)
+        response = self.class.delete(path, headers: headers(token), query: refresh_token)
         response.parsed_response
       end
 
