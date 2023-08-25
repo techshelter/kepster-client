@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'uri'
 module Kepster
   module Client
     class Base
@@ -6,6 +7,7 @@ module Kepster
       base_uri ENV['KEPSTER_ENDPOINT']
       format :json
 
+      
       
       def initialize
         @kepster_api_key = ENV['KEPSTER_API_KEY']
@@ -32,7 +34,10 @@ module Kepster
       end
 
       def query_string(payload)
-        ::Rack::Utils.build_nested_query(payload)
+        q = ::Rack::Utils.build_nested_query(payload)
+        params = URI.decode_www_form(q).to_h
+        URI.encode_www_form(params)
+        # "register_params%5Bfirst_name%5D=Ecole%20de&register_params%5Blast_name%5D=Multimedia&register_params%5Bphone_number%5D=0759937799&register_params%5Bcore_group_id%5D=9bfceff4-2730-448c-bf1f-ed303e8d48dc"
       end
     end
   end
