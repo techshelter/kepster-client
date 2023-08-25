@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 require 'digest'
+require 'cgi'
 module Kepster
   module Crypto
     class Verifier
       def call(query_string:, resource_path:, shared_secret:)
+        puts "QUERY STRING : #{query_string}"
         timestamp = Time.now.getutc.to_i.to_s
         hash_input = "#{timestamp}$#{resource_path}$#{query_string}"
         hash_output = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), shared_secret, hash_input)

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 # create a module email for kepster client with httparty
+
 module Kepster
   module Client
     class SMS < Base
@@ -11,6 +12,7 @@ module Kepster
           { first_name:, last_name:, phone_number:, core_group_id: }
         }
         token = x_kepster_token(payload, path)
+        puts "token #{token}"
         response = self.class.post(path, headers: headers(token), query: payload)
         raise Kepster::Errors::RegistrationNotAllowed if response.code != 201
         response.parsed_response
@@ -21,6 +23,7 @@ module Kepster
         payload = { phone_number:, otp_sended:, group_id: }
         token = x_kepster_token(payload, path)
         response = self.class.get(path, headers: headers(token), query: payload)
+        puts "response in kpester #{response.parsed_response}"
         response.parsed_response
       end
 
@@ -37,6 +40,7 @@ module Kepster
         payload = { phone_number:, otp_sended:, group_id: }
         token = x_kepster_token(payload, path)
         response = self.class.get(path, headers: headers(token), query: payload)
+        puts "response in kpester #{response.parsed_response}"
         response.parsed_response
       end
 
@@ -53,6 +57,7 @@ module Kepster
         payload = { phone_number:, group_id: }
         token = x_kepster_token(payload, path)
         response = self.class.post(path, headers: headers(token), query: payload)
+        puts "response in kpester #{response.parsed_response}"
         response.parsed_response
       end
 
