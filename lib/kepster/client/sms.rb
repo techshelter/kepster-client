@@ -15,7 +15,7 @@ module Kepster
         puts "token #{token}"
         response = self.class.post(path, headers: headers(token), query: payload)
         puts "response in kpester #{response.parsed_response}"
-        raise Kepster::Errors::RegistrationNotAllowed if response.code != 201
+        # raise Kepster::Errors::RegistrationNotAllowed if response.code != 201
         response.parsed_response
       end
 
