@@ -14,6 +14,7 @@ module Kepster
         token = x_kepster_token(payload, path)
         puts "token #{token}"
         response = self.class.post(path, headers: headers(token), query: payload)
+        puts "response in kpester #{response.parsed_response}"
         raise Kepster::Errors::RegistrationNotAllowed if response.code != 201
         response.parsed_response
       end
@@ -32,6 +33,7 @@ module Kepster
         payload = { phone_number:, group_id: }
         token = x_kepster_token(payload, path)
         response = self.class.post(path, headers: headers(token), query: payload)
+        puts "response in kpester #{response.parsed_response}"
         response.parsed_response
       end
 
