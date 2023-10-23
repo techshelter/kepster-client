@@ -5,11 +5,11 @@ module Kepster
   module Client
     class SMS < Base
 
-      def register(first_name:, last_name:, phone_number:, core_group_id:)
+      def register(first_name:, last_name:, phone_number:, core_group_id:, from:)
         path = '/api/sms/register'
         payload = {
           "register_params" => 
-          { first_name:, last_name:, phone_number:, core_group_id: }
+          { first_name:, last_name:, phone_number:, core_group_id:, from: }
         }
         token = x_kepster_token(payload, path)
         puts "token #{token}"
