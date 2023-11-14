@@ -70,6 +70,7 @@ module Kepster
                 "kepster_id" => id,
                 "api_key" => api_key
               }
+        # raise payload.inspect
         token = x_kepster_token(payload, path)
         response = self.class.put(path, headers: headers(token), query: payload)
         puts "response in kpester #{response.parsed_response}"
