@@ -34,9 +34,11 @@ module Kepster
       end
 
       def query_string(payload)
-        q = ::Rack::Utils.build_nested_query(payload)
-        params = URI.decode_www_form(q).to_h
-        URI.encode_www_form(params)
+        payload.to_query
+        # q = ::Rack::Utils.build_nested_query(payload)
+        # params = URI.decode_www_form(q).to_h
+        # p URI.encode_www_form(params)
+        # URI.encode_www_form(params)
         # "register_params%5Bfirst_name%5D=Ecole%20de&register_params%5Blast_name%5D=Multimedia&register_params%5Bphone_number%5D=0759937799&register_params%5Bcore_group_id%5D=9bfceff4-2730-448c-bf1f-ed303e8d48dc"
       end
     end
