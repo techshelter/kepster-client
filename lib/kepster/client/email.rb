@@ -11,8 +11,10 @@ module Kepster
           { first_name:, last_name:, email:, core_group_id:, redirect_url: }
         }
         token = x_kepster_token(payload, path)
+        puts "token: #{token}"
         response = self.class.post(path, headers: headers(token), query: payload)
-        raise Kepster::Errors::RegistrationNotAllowed if response.code != 201
+        # raise Kepster::Errors::RegistrationNotAllowed if response.code != 201
+        puts "response in kpester #{response.parsed_response}"
         response.parsed_response
       end
 
@@ -38,34 +40,6 @@ module Kepster
         self.class.get(path, headers: headers(token), query: payload)
       end
 
-      # def refresh_token(refresh_token)
-      #   path = "/api/email/token"
-      #   payload = {refresh_token:}
-      #   token = x_kepster_token(payload, path)
-      #   self.class.get(path, headers: headers(token), query: payload)
-      # end
-
-      private
-
-      def x_kepster_token(payload, path)
-        Kepster::Crypto::Verifier.new.call(
-          query_string: query_string(payload),
-          resource_path: path,
-          shared_secret: @kepster_shared_secret
-        )
-      end
-
-      def headers(token)
-        { 
-          'x-kepster-token' => token,
-          'x-kepster-key' => @kepster_api_key,
-          'Content-Type' => 'application/json'
-        }
-      end
-
-      def query_string(payload)
-        ::Rack::Utils.build_nested_query(payload)
-      end
     end
   end
 end
