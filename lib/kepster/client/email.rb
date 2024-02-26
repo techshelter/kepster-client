@@ -23,6 +23,7 @@ module Kepster
         payload = { email:, group_id:, redirect_url: }
         token = x_kepster_token(payload, path)
         response = self.class.post(path, headers: headers(token), query: payload)
+        puts "response in kpester #{response.parsed_response}"
         response.parsed_response
       end
 
@@ -38,6 +39,15 @@ module Kepster
         payload = {code: token, auth_user_id: user_id}
         token = x_kepster_token(payload, path)
         self.class.get(path, headers: headers(token), query: payload)
+      end
+
+      def resend_email(email:, group_id:, redirect_url:)
+        path = '/api/resend/email'
+        payload = {email:, group_id:, redirect_url:}
+        token = x_kepster_token(payload, path)
+        response = self.class.post(path, headers: headers(token) ,query: payload)
+        puts "response in kepster : #{response.parsed_response}"
+        response.parsed_response
       end
 
     end
