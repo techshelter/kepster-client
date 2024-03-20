@@ -50,6 +50,19 @@ module Kepster
         response.parsed_response
       end
 
+      def update_user(user_data:, id:, api_key:)
+        path = "/api/users/#{id}/strategy/email/update"
+        payload = {
+          "user_params" => { first_name: user_data[:first_name], last_name: user_data[:last_name], email: user_data[:email]},
+          "kepster_id" => id,
+          "api_key" => api_key
+        }
+        token = x_kepster_token(payload, path)
+        response = self.class.put(path, headers: headers(token), query: payload)
+        puts "response in kpester #{response.parsed_response}"
+        response.parsed_response
+      end
+
     end
   end
 end
