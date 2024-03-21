@@ -64,7 +64,7 @@ module Kepster
       end
 
       def update_user(user_data:, id:, api_key:)
-        path = '/api/users/update'
+        path = "/api/users/#{id}/update"
         payload = {
                 "user_params" => { first_name: user_data[:first_name], last_name: user_data[:last_name], phone_number: user_data[:phone_number]},
                 "kepster_id" => id,
