@@ -77,6 +77,18 @@ module Kepster
         response.parsed_response
       end
 
+      def update_kepster_custom_fields(phone_number:, email:)
+        path = "/api/change_kepster_custom_fields"
+        payload = {
+          "custom_fields" => {phone_number:, email:}
+        }
+
+        token = x_kepster_token(payload, path)
+        response = self.class.post(path, headers: headers(token), query: payload)
+        puts "response in kpester #{response.parsed_response}"
+        response.parsed_response
+      end
+
     end
   end
 end
