@@ -85,7 +85,7 @@ module Kepster
 
         token = x_kepster_token(payload, path)
         response = self.class.post(path, headers: headers(token), query: payload)
-        puts "response in kpester #{response}"
+        puts "RESPONSE IN KEPSTER #{response}"
         response
         # puts "response in kpester #{response.parsed_response}"
         # response.parsed_response
