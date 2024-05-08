@@ -91,6 +91,15 @@ module Kepster
         response.parsed_response
       end
 
+      def check_registration(phone_number:, group_id:)
+        path = "/api/sms/check-registration"
+        payload = { phone_number:, group_id: }
+        token = x_kepster_token(payload, path)
+        response = self.class.post(path, headers: headers(token), query: payload)
+        puts "response in kpester #{response.parsed_response}"
+        response.parsed_response
+      end
+
     end
   end
 end
