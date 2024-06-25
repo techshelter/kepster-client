@@ -40,7 +40,7 @@ module Kepster
         path = '/api/sms/auth/token'
         payload = { phone_number:, otp_sended:, group_id: }
         token = x_kepster_token(payload, path)
-        response = self.class.get(path, headers: headers(token), body: payload.to_json)
+        response = self.class.get(path, headers: headers(token), query: payload)
         puts "response in kpester #{response.parsed_response}"
         response.parsed_response
       end
