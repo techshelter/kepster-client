@@ -11,3 +11,4 @@ gem "rspec", "~> 3.0"
 
 gem "rubocop", "~> 1.21"
 
+gem 'uri', '0.12.0'
