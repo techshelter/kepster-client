@@ -8,6 +8,7 @@ module Kepster
         puts "QUERY STRING : #{query_string}"
         timestamp = Time.now.getutc.to_i.to_s
         hash_input = "#{timestamp}$#{resource_path}$#{query_string}"
+        # raise hash_input.inspect
         hash_output = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), shared_secret, hash_input)
         token = timestamp + ":" + hash_output
         token.upcase

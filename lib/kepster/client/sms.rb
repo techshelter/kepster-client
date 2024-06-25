@@ -12,8 +12,7 @@ module Kepster
           { first_name:, last_name:, phone_number:, email:, core_group_id:, from: }
         }
         token = x_kepster_token(payload, path)
-        puts "token #{token}"
-        response = self.class.post(path, headers: headers(token), query: payload)
+        response = self.class.post(path, headers: headers(token), body: payload.to_json)
         puts "response in kpester #{response.parsed_response}"
         # raise Kepster::Errors::RegistrationNotAllowed if response.code != 201
         response.parsed_response
@@ -23,7 +22,7 @@ module Kepster
         path = '/api/sms/register/token'
         payload = { phone_number:, otp_sended:, group_id: }
         token = x_kepster_token(payload, path)
-        response = self.class.get(path, headers: headers(token), query: payload)
+        response = self.class.get(path, headers: headers(token), body: payload.to_json)
         puts "response in kpester #{response.parsed_response}"
         response.parsed_response
       end
@@ -32,7 +31,7 @@ module Kepster
         path = '/api/sms/authenticate'
         payload = { phone_number:, group_id: }
         token = x_kepster_token(payload, path)
-        response = self.class.post(path, headers: headers(token), query: payload)
+        response = self.class.post(path, headers: headers(token), body: payload.to_json)
         puts "response in kpester #{response.parsed_response}"
         response.parsed_response
       end
@@ -41,7 +40,7 @@ module Kepster
         path = '/api/sms/auth/token'
         payload = { phone_number:, otp_sended:, group_id: }
         token = x_kepster_token(payload, path)
-        response = self.class.get(path, headers: headers(token), query: payload)
+        response = self.class.get(path, headers: headers(token), body: payload.to_json)
         puts "response in kpester #{response.parsed_response}"
         response.parsed_response
       end
@@ -58,7 +57,7 @@ module Kepster
         path = '/api/sms/resend-otp'
         payload = { phone_number:, group_id: }
         token = x_kepster_token(payload, path)
-        response = self.class.post(path, headers: headers(token), query: payload)
+        response = self.class.post(path, headers: headers(token), body: payload.to_json)
         puts "response in kpester #{response.parsed_response}"
         response.parsed_response
       end
@@ -72,7 +71,7 @@ module Kepster
               }
         # raise payload.inspect
         token = x_kepster_token(payload, path)
-        response = self.class.put(path, headers: headers(token), query: payload)
+        response = self.class.put(path, headers: headers(token), body: payload.to_json)
         puts "response in kpester #{response.parsed_response}"
         response.parsed_response
       end

@@ -18,8 +18,9 @@ module Kepster
       private
 
       def x_kepster_token(payload, path)
+        ordered_payload = deep_sort(payload)
         Kepster::Crypto::Verifier.new.call(
-          query_string: query_string(payload),
+          query_string: query_string(ordered_payload),
           resource_path: path,
           shared_secret: @kepster_shared_secret
         )
@@ -34,12 +35,29 @@ module Kepster
       end
 
       def query_string(payload)
-        payload.to_query
-        # q = ::Rack::Utils.build_nested_query(payload)
-        # params = URI.decode_www_form(q).to_h
-        # p URI.encode_www_form(params)
-        # URI.encode_www_form(params)
-        # "register_params%5Bfirst_name%5D=Ecole%20de&register_params%5Blast_name%5D=Multimedia&register_params%5Bphone_number%5D=0759937799&register_params%5Bcore_group_id%5D=9bfceff4-2730-448c-bf1f-ed303e8d48dc"
+        nested_hash_to_query_string(payload)
+      end
+
+      private
+
+      def nested_hash_to_query_string(hash, prefix = nil)
+        hash.flat_map do |k, v|
+          key = prefix ? "#{prefix}[#{k}]" : k
+          case v
+          when Hash
+            nested_hash_to_query_string(v, key)
+          else
+            "#{URI.encode_www_form_component(key)}=#{URI.encode_www_form_component(v.to_s)}"
+          end
+        end.join("&")
+      end
+
+      def deep_sort(hash)
+        sorted_hash = hash.sort.to_h
+        sorted_hash.each do |key, value|
+          sorted_hash[key] = deep_sort(value) if value.is_a?(Hash)
+        end
+        sorted_hash
       end
     end
   end
