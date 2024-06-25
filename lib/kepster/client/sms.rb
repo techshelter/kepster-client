@@ -83,7 +83,7 @@ module Kepster
         }
 
         token = x_kepster_token(payload, path)
-        response = self.class.post(path, headers: headers(token), query: payload)
+        response = self.class.post(path, headers: headers(token), body: payload.to_json)
         puts "--------------------------------"
         puts response
         puts "response in kpester #{response.parsed_response}"
@@ -94,7 +94,7 @@ module Kepster
         path = "/api/sms/check-registration"
         payload = { phone_number:, group_id: }
         token = x_kepster_token(payload, path)
-        response = self.class.post(path, headers: headers(token), query: payload)
+        response = self.class.post(path, headers: headers(token), body: payload.to_json)
         puts "response in kpester #{response.parsed_response}"
         response.parsed_response
       end
