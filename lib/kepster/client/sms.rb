@@ -19,6 +19,29 @@ module Kepster
         response.parsed_response
       end
 
+      def register_contractor(first_name:, last_name:, phone_number:, email:,
+        address:,
+        contractor_type:,
+        core_group_id:,
+        from:
+      )
+        path = '/api/sms/register'
+        payload = {
+          "register_params" => 
+          { first_name:, last_name:, phone_number:, email:,
+            address:,
+            contractor_type:,
+            core_group_id:,
+            from:
+          }
+        }
+        token = x_kepster_token(payload, path)
+        puts "token #{token}"
+        response = self.class.post(path, headers: headers(token), query: payload)
+        puts "response in kpester #{response.parsed_response}"
+        response.parsed_response
+      end
+
       def validate_registration_otp(phone_number:, otp_sended:, group_id:)
         path = '/api/sms/register/token'
         payload = { phone_number:, otp_sended:, group_id: }
